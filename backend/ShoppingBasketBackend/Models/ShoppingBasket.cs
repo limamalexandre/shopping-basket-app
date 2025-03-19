@@ -11,8 +11,5 @@ namespace ShoppingBasketBackend.Models
 
         // Items contained in the basket
         public List<BasketItem> Items { get; set; } = [];
-        public decimal SubTotal { get; set; }
-        public decimal TotalDiscount { get; set; }
-        public decimal Total { get; set; }
     }
 }
