@@ -55,4 +55,9 @@ export class BasketFormComponent implements OnInit {
       this.router.navigate(['/receipt']);
     });
   }
+
+  // Check if at least one item has a quantity greater than 0.
+  hasPositiveQuantity(): boolean {
+    return this.basket.items.some(item => item.quantity > 0);
+  }
 }

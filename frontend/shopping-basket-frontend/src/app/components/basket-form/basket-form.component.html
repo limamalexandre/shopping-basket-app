@@ -3,5 +3,5 @@
       <label>{{ item.product.name }}:</label>
       <input type="number" [(ngModel)]="basket.items[i].quantity" name="quantity{{i}}" min="0" required>
     </div>
-    <button type="submit">Generate Receipt</button>
+    <button type="submit" [disabled]="!hasPositiveQuantity()">Generate Receipt</button>
 </form>
