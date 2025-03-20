@@ -1,0 +1,7 @@
+<form (ngSubmit)="onSubmit()" #basketForm="ngForm">
+    <div *ngFor="let item of basket.items; let i = index">
+      <label>{{ item.product.name }}:</label>
+      <input type="number" [(ngModel)]="basket.items[i].quantity" name="quantity{{i}}" min="0" required>
+    </div>
+    <button type="submit">Generate Receipt</button>
+</form>
