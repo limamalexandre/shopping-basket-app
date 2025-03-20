@@ -13,5 +13,15 @@
 
             return appleItem.Product.Price * appleItem.Quantity * 0.10M;
         }
+
+        public decimal CalculateItemDiscount(BasketItem item, ShoppingBasket basket)
+        {
+            if (item.Product.Name.Equals("Apples", StringComparison.OrdinalIgnoreCase))
+            {
+                return item.Product.Price * item.Quantity * 0.10M;
+            }
+
+            return 0;
+        }
     }
 }

@@ -15,11 +15,11 @@ namespace ShoppingBasketBackend.Controllers
             _basketService = basketService;
         }
 
-        // POST: api/basket/receipt
+        // POST: api/Basket/receipt
         [HttpPost("receipt")]
         public async Task<IActionResult> GenerateReceipt([FromBody] ShoppingBasket basket)
         {
-            if (basket == null || basket.Items.Count == 0)
+            if (basket == null || basket.Items == null || basket.Items.Count == 0)
             {
                 return BadRequest("Basket is empty or invalid.");
             }

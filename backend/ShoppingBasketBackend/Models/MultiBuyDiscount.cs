@@ -19,5 +19,24 @@
 
             return eligibleBreadCount * breadItem.Product.Price * 0.50M;
         }
+
+        public decimal CalculateItemDiscount(BasketItem item, ShoppingBasket basket)
+        {
+            if (item.Product.Name.Equals("Bread", StringComparison.OrdinalIgnoreCase))
+            {
+                var soupItem = basket.Items.FirstOrDefault(
+                    i => i.Product.Name.Equals("Soup", StringComparison.OrdinalIgnoreCase));
+
+                if (soupItem != null)
+                {
+                    // Calculate eligible discount per Bread unit.
+                    int eligibleBreadCount = Math.Min(soupItem.Quantity / 2, item.Quantity);
+                    // Spread the discount over the total bread items.
+                    return eligibleBreadCount * item.Product.Price * 0.50M;
+                }
+            }
+
+            return 0;
+        }
     }
 }

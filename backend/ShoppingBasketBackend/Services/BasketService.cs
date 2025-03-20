@@ -1,5 +1,4 @@
 ﻿using ShoppingBasketBackend.Models;
-using ShoppingBasketBackend.Repositories;
 
 namespace ShoppingBasketBackend.Services
 {
@@ -27,15 +26,19 @@ namespace ShoppingBasketBackend.Services
 
             foreach (var item in basket.Items)
             {
-                var lineTotal = item.Product.Price * item.Quantity;
-                receipt.Items.Add(new ReceiptItem
+                if (item.Quantity > 0)
                 {
-                    ProductName = item.Product.Name,
-                    Quantity = item.Quantity,
-                    UnitPrice = item.Product.Price,
-                    LineTotal = lineTotal,
-                    DiscountApplied = 0
-                });
+                    decimal itemDiscount = _discounts.Sum(d => d.CalculateItemDiscount(item, basket));
+                    var lineTotal = (item.Product.Price * item.Quantity) - itemDiscount;
+                    receipt.Items.Add(new ReceiptItem
+                    {
+                        ProductName = item.Product.Name,
+                        Quantity = item.Quantity,
+                        UnitPrice = item.Product.Price,
+                        DiscountApplied = itemDiscount,
+                        LineTotal = lineTotal
+                    });
+                }
             }
 
             return receipt;
