@@ -25,4 +25,6 @@
     <p>Total Discount: -{{ receipt.totalDiscount | currency }}</p>
     <h3>Total: {{ receipt.total | currency }}</h3>
   </div>
-</div>
+  <div class="button-container">
+    <button (click)="backToBasket()">Back to Basket</button>
+  </div>

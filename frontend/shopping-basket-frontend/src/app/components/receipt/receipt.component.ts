@@ -26,4 +26,8 @@ export class ReceiptComponent {
       this.router.navigate(['/']);
     }
   }
+
+  backToBasket(): void {
+    this.router.navigate(['/']);
+  }
 }
