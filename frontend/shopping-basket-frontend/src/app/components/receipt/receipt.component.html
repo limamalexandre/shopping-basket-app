@@ -1,0 +1,28 @@
+<div *ngIf="receipt">
+  <h2>Receipt</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Discount</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of receipt.items">
+        <td>{{ item.productName }}</td>
+        <td>{{ item.unitPrice | currency }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.discountApplied | currency }}</td>
+        <td>{{ item.lineTotal | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="totals">
+    <p>Subtotal: {{ receipt.subTotal | currency }}</p>
+    <p>Total Discount: -{{ receipt.totalDiscount | currency }}</p>
+    <h3>Total: {{ receipt.total | currency }}</h3>
+  </div>
+</div>
