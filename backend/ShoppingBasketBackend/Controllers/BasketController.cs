@@ -24,7 +24,7 @@ namespace ShoppingBasketBackend.Controllers
                 return BadRequest("Basket is empty or invalid.");
             }
 
-            var receipt = await _basketService.CalculateReceiptAsync(basket);
+            var receipt = await _basketService.GenerateReceiptAsync(basket);
             return Ok(receipt);
         }
     }

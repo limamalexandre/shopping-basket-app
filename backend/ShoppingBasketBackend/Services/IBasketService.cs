@@ -4,6 +4,6 @@ namespace ShoppingBasketBackend.Services
 {
     public interface IBasketService
     {
-        Task<Receipt> CalculateReceiptAsync(ShoppingBasket basket);
+        Task<Receipt> GenerateReceiptAsync(ShoppingBasket basket);
     }
 }

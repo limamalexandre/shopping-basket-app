@@ -16,7 +16,7 @@ namespace ShoppingBasketBackend.Services
             _receiptRepository = receiptRepository;
         }
 
-        public async Task<Receipt> CalculateReceiptAsync(ShoppingBasket basket)
+        public async Task<Receipt> GenerateReceiptAsync(ShoppingBasket basket)
         {
             var subTotal = basket.Items.Sum(item => item.Product.Price * item.Quantity);
             var totalDiscount = _discounts.Sum(d => d.CalculateDiscount(basket));
