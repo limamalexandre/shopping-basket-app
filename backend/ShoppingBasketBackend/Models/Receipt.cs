@@ -13,5 +13,6 @@ namespace ShoppingBasketBackend.Models
         public decimal SubTotal { get; set; }
         public decimal TotalDiscount { get; set; }
         public decimal Total { get; set; }
+        public DateTime Date {  get; set; }
     }
 }

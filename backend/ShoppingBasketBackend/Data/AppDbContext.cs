@@ -12,6 +12,8 @@ namespace ShoppingBasketBackend.Data
 
         // Define the Products table
         public DbSet<Product> Products { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
+        public DbSet<ReceiptItem> ReceiptItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,6 +26,11 @@ namespace ShoppingBasketBackend.Data
                 new Product { Id = 3, Name = "Milk", Price = 1.30M },
                 new Product { Id = 4, Name = "Apples", Price = 1.00M }
             );
+
+            modelBuilder.Entity<ReceiptItem>()
+                .HasOne(ri => ri.Receipt)
+                .WithMany(r => r.Items)
+                .HasForeignKey(ri => ri.ReceiptId);
         }
     }
 }

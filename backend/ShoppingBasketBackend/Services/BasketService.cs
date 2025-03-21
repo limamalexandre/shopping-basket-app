@@ -1,15 +1,19 @@
 ﻿using ShoppingBasketBackend.Models;
+using ShoppingBasketBackend.Repositories;
 
 namespace ShoppingBasketBackend.Services
 {
     public class BasketService : IBasketService
     {
         private readonly IEnumerable<IDiscount> _discounts;
+        private readonly IReceiptRepository _receiptRepository;
 
         public BasketService(
-            IEnumerable<IDiscount> discounts
+            IEnumerable<IDiscount> discounts,
+            IReceiptRepository receiptRepository
         ){
             _discounts = discounts;
+            _receiptRepository = receiptRepository;
         }
 
         public async Task<Receipt> CalculateReceiptAsync(ShoppingBasket basket)
@@ -21,7 +25,8 @@ namespace ShoppingBasketBackend.Services
             {
                 SubTotal = subTotal,
                 TotalDiscount = totalDiscount,
-                Total = subTotal - totalDiscount
+                Total = subTotal - totalDiscount,
+                Date = DateTime.UtcNow
             };
 
             foreach (var item in basket.Items)
@@ -40,6 +45,10 @@ namespace ShoppingBasketBackend.Services
                     });
                 }
             }
+
+            // Save the receipt (which serves as transaction)
+            await _receiptRepository.AddAsync(receipt);
+            await _receiptRepository.SaveChangesAsync();
 
             return receipt;
         }
